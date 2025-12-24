@@ -1,6 +1,6 @@
 {
     "TITLE": {
-    "PANCHAYAT": "Grampanchayat "
+    "PANCHAYAT": "Grampanchayat  Bavi "
   },
   "NAV": {
     "HOME": "Home",
@@ -15,8 +15,8 @@
   },
    "CAROUSEL": {
     "SLIDE1": {
-      "TITLE": "First slide label",
-      "DESC": "Some representative placeholder content for the first slide."
+      "TITLE": "",
+      "DESC": ""
     },
     "SLIDE2": {
       "TITLE": "Second slide label",
@@ -31,14 +31,14 @@
     "title": "Chief Gram Panchayat Officer",
     "officers": [
       {
-        "name": "Mr. sa  shinde",
-        "post": "Chief Officer",
-        "image": "assets/adhikari/dummy-image.webp"
+        "name": "Sanjay machhindra Shinde",
+        "post": "Sarpanch ",
+        "image": "assets/adhikari/sarpanch-sanjay-shinde.jpeg"
       },
       {
-        "name": "Mrs. Sa Pawar",
-        "post": "Assistant Officer",
-        "image": "assets/adhikari/dummy-image.webp"
+        "name": "Ashok Shivaji Shinde",
+        "post": "Upsarpanch",
+        "image": "assets/adhikari/upsarpanch-ashok-shivaji shide.jpeg"
       },
       {
         "name": "Mr. sa pawar",
@@ -71,13 +71,13 @@
     "municipalCouncil": { "label": "Villages Included in Municipal Council", "value": "1" },
     "totalArea": { "label": "Total Area (Hectares)", "value": "78428" },
     "cultivableArea": { "label": "Cultivable Area (Hectares)", "value": "58288" },
-    "primaryHealth": { "label": "Primary Health Centers", "value": "5" },
+    "primaryHealth": { "label": "Primary Health Centers", "value": "1" },
     "hospitals": { "label": "Sub-District Hospitals", "value": "28" },
     "veterinary": { "label": "Veterinary Clinics", "value": "10" },
-    "population": { "label": "Total Population", "value": "219032" },
+    "population": { "label": "Total Population", "value": "3279" },
     "male": { "label": "Male", "value": "110000" },
     "female": { "label": "Female", "value": "109032" },
-    "anganwadi": { "label": "Anganwadi Center", "value": "2" }
+    "anganwadi": { "label": "Anganwadi Center", "value": "1" }
   },
   "reports": {
     "title": "Reports",

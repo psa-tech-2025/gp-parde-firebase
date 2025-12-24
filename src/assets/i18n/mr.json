@@ -1,7 +1,7 @@
 {
   
   "TITLE": {
-    "PANCHAYAT": "ग्रामपंचायत "
+    "PANCHAYAT": "ग्रामपंचायत बावी"
   },
 
 
@@ -18,8 +18,8 @@
   },
   "CAROUSEL": {
     "SLIDE1": {
-      "TITLE": "पहिल्या स्लाईडचे शीर्षक",
-      "DESC": "पहिल्या स्लाईडसाठी काही नमुना माहिती."
+       "TITLE": "",
+       "DESC": ""
     },
     "SLIDE2": {
       "TITLE": "दुसऱ्या स्लाईडचे शीर्षक",
@@ -35,18 +35,13 @@
     "title": "प्रमुख ग्रामपंचायत अधिकारी",
     "officers": [
       {
-        "name": "श्री. सुनील शिंदे",
-        "post": "प्रमुख अधिकारी",
-        "image": "assets/adhikari/dummy-image.webp"
+        "name": "श्री. संजय मच्छिंद्र शिंदे",
+        "post": "सरपंच ग्रामपंचायत बावी",
+       "image": "assets/adhikari/sarpanch-sanjay-shinde.jpeg"
       },
       {
-        "name": "श्री. सुनील शिंदे",
-        "post": "सहाय्यक अधिकारी",
-        "image": "assets/adhikari/dummy-image.webp"
-      },
-      {
-        "name": "श्री. सुनील पाटील",
-        "post": "लिपिक",
+        "name": "श्री. अशोक शिवाजी शिंदे ",
+        "post": "उपसरपंच ग्रामपंचायत बावी",
         "image": "assets/adhikari/dummy-image.webp"
       }
     ]
@@ -63,6 +58,51 @@
       "name": "सौ. कविता देशमुख",
       "post": "सदस्य",
       "image": "assets/adhikari/dummy-image.webp"
+    },
+        {
+      "name": "सौ. कविता देशमुख",
+      "post": "सदस्य",
+      "image": "assets/adhikari/dummy-image.webp"
+    },
+        {
+      "name": "सौ. कविता देशमुख",
+      "post": "सदस्य",
+      "image": "assets/adhikari/dummy-image.webp"
+    },
+        {
+      "name": "सौ. कविता देशमुख",
+      "post": "सदस्य",
+      "image": "assets/adhikari/dummy-image.webp"
+    },
+        {
+      "name": "सौ. कविता देशमुख",
+      "post": "सदस्य",
+      "image": "assets/adhikari/dummy-image.webp"
+    },
+        {
+      "name": "सौ. कविता देशमुख",
+      "post": "सदस्य",
+      "image": "assets/adhikari/dummy-image.webp"
+    },
+        {
+      "name": "सौ. कविता देशमुख",
+      "post": "सदस्य",
+      "image": "assets/adhikari/dummy-image.webp"
+    },
+        {
+      "name": "सौ. कविता देशमुख",
+      "post": "सदस्य",
+      "image": "assets/adhikari/dummy-image.webp"
+    },
+        {
+      "name": "सौ. कविता देशमुख",
+      "post": "सदस्य",
+      "image": "assets/adhikari/dummy-image.webp"
+    },
+        {
+      "name": "सौ. कविता देशमुख",
+      "post": "सदस्य",
+      "image": "assets/adhikari/dummy-image.webp"
     }
   ]
 },
@@ -75,13 +115,13 @@
     "municipalCouncil": { "label": "नगर परिषदेत समाविष्ट गावे", "value": "१" },
     "totalArea": { "label": "एकूण क्षेत्रफळ (हेक्टरमध्ये)", "value": "७८४२८" },
     "cultivableArea": { "label": "खतपदार्थ क्षेत्रफळ (हेक्टरमध्ये)", "value": "५८२८८" },
-    "primaryHealth": { "label": "प्राथमिक आरोग्य केंद्रे", "value": "५" },
+    "primaryHealth": { "label": "प्राथमिक आरोग्य केंद्रे", "value": "1" },
     "hospitals": { "label": "उपजिल्हा रुग्णालये", "value": "२८" },
     "veterinary": { "label": "पशुवैद्यकीय दवाखाने", "value": "१०" },
-    "population": { "label": "एकूण लोकसंख्या", "value": "२१९०३२" },
+    "population": { "label": "एकूण लोकसंख्या", "value": "3279" },
     "male": { "label": "पुरुष", "value": "११००००" },
     "female": { "label": "स्त्रिया", "value": "१०९०३२" },
-    "anganwadi": { "label": "अंगणवाडी केंद्र", "value": "२" }
+    "anganwadi": { "label": "अंगणवाडी केंद्र", "value": "1" }
   },
   "reports": {
     "title": "अहवाल",

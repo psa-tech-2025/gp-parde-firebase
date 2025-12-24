@@ -179,6 +179,111 @@ updateCitizenInfo(data: any) {
   return this.firestore.doc('citizenInfo/main')
     .set(data, { merge: true });
 }
+/* ================= HOME : NOTICE BOARD ================= */
+
+getHomeNotices() {
+  return this.firestore
+    .collection('homeNotices', ref => ref.orderBy('createdAt', 'desc'))
+    .snapshotChanges()
+    .pipe(
+      map(actions =>
+        actions.map(a => ({
+          id: a.payload.doc.id,
+          ...a.payload.doc.data() as any
+        }))
+      )
+    );
+}
+
+addHomeNotice(text: string) {
+  return this.firestore.collection('homeNotices').add({
+    text,
+    createdAt: new Date()
+  });
+}
+
+updateHomeNotice(id: string, text: string) {
+  return this.firestore.collection('homeNotices').doc(id).update({ text });
+}
+
+deleteHomeNotice(id: string) {
+  return this.firestore.collection('homeNotices').doc(id).delete();
+}
+
+
+/* ================= HOME : ANNOUNCEMENTS ================= */
+
+getHomeAnnouncements() {
+  return this.firestore
+    .collection('homeAnnouncements', ref => ref.orderBy('createdAt', 'desc'))
+    .snapshotChanges()
+    .pipe(
+      map(actions =>
+        actions.map(a => ({
+          id: a.payload.doc.id,
+          ...a.payload.doc.data() as any
+        }))
+      )
+    );
+}
+
+addHomeAnnouncement(text: string) {
+  return this.firestore.collection('homeAnnouncements').add({
+    text,
+    createdAt: new Date()
+  });
+}
+
+updateHomeAnnouncement(id: string, text: string) {
+  return this.firestore.collection('homeAnnouncements').doc(id).update({ text });
+}
+
+deleteHomeAnnouncement(id: string) {
+  return this.firestore.collection('homeAnnouncements').doc(id).delete();
+}
+
+
+/* ================= HOME : INTRO / OFFICERS ================= */
+
+// READ – Public (Home page)
+getHomeIntro() {
+  return this.firestore
+    .collection('homeIntro', ref => ref.orderBy('createdAt', 'desc'))
+    .snapshotChanges()
+    .pipe(
+      map(actions =>
+        actions.map(a => ({
+          id: a.payload.doc.id,
+          ...a.payload.doc.data() as any
+        }))
+      )
+    );
+}
+
+// CREATE – Login only
+addHomeIntro(data: any, uid: string) {
+  return this.firestore.collection('homeIntro').add({
+    ...data,
+    createdBy: uid,
+    createdAt: new Date()
+  });
+}
+
+// UPDATE – Login only
+updateHomeIntro(id: string, data: any) {
+  return this.firestore.collection('homeIntro').doc(id).update({
+    ...data,
+    updatedAt: new Date()
+  });
+}
+
+// DELETE – Login only
+deleteHomeIntro(id: string) {
+  return this.firestore.collection('homeIntro').doc(id).delete();
+}
+
+
+
 
 
 

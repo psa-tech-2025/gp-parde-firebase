@@ -12,6 +12,7 @@ import { RegisterComponent } from './auth/register/register.component';
 import { SignInComponent } from './auth/sign-in/sign-in.component';
 import { VerifyEmailComponent } from './auth/verify-email/verify-email.component';
 import { ForgotPasswordComponent } from './auth/forgot-password/forgot-password.component';
+import { HomeAdminComponent } from './component/home-admin/home-admin.component';
 
 const routes: Routes = [
   {
@@ -47,6 +48,11 @@ const routes: Routes = [
   },
     { path: 'verify-email', component: VerifyEmailComponent },
   { path: 'forgot-password', component: ForgotPasswordComponent },
+   {
+     path: 'home-admin',
+  component: HomeAdminComponent,
+  // canActivate: [AuthGuard]
+   }
 
 
 ];

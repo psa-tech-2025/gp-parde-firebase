@@ -11,6 +11,13 @@ export const environment = {
   storageBucket: "fir-electionsps.firebasestorage.app",
   messagingSenderId: "29919292277",
   appId: "1:29919292277:web:4542242de5a8e27ae9413c"
+
+  //  apiKey: "AIzaSyAWdsgPDkhUDHsLK4fXb3oyrc9MW98O8A0",
+  // authDomain: "bavigp-44105.firebaseapp.com",
+  // projectId: "bavigp-44105",
+  // storageBucket: "bavigp-44105.firebasestorage.app",
+  // messagingSenderId: "273761641932",
+  // appId: "1:273761641932:web:34deb00b7f6e053b2c6969"
 }
 };
 

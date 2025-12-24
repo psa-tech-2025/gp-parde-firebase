@@ -1,0 +1,116 @@
+<div class="container my-5" *ngIf="isAdmin">
+
+  <h3 class="text-danger mb-4">Home Content Admin</h3>
+
+  <!-- NOTICE BOARD -->
+  <div class="card p-3 mb-4">
+    <h5>Notice Board</h5>
+
+    <div class="d-flex mb-2">
+      <input class="form-control me-2"
+             [(ngModel)]="newNotice"
+             placeholder="Add notice">
+      <button class="btn btn-primary" (click)="addNotice()">Add</button>
+    </div>
+
+    <div *ngFor="let n of notices" class="d-flex mb-2">
+      <input class="form-control me-2"
+             [(ngModel)]="n.text">
+      <button class="btn btn-success me-1"
+              (click)="updateNotice(n.id, n.text)">Update</button>
+      <button class="btn btn-danger"
+              (click)="deleteNotice(n.id)">Delete</button>
+    </div>
+  </div>
+
+  <!-- ANNOUNCEMENTS -->
+  <div class="card p-3">
+    <h5>Announcements</h5>
+
+    <div class="d-flex mb-2">
+      <input class="form-control me-2"
+             [(ngModel)]="newAnnouncement"
+             placeholder="Add announcement">
+      <button class="btn btn-primary" (click)="addAnnouncement()">Add</button>
+    </div>
+
+    <div *ngFor="let a of announcements" class="d-flex mb-2">
+      <input class="form-control me-2"
+             [(ngModel)]="a.text">
+      <button class="btn btn-success me-1"
+              (click)="updateAnnouncement(a.id, a.text)">Update</button>
+      <button class="btn btn-danger"
+              (click)="deleteAnnouncement(a.id)">Delete</button>
+    </div>
+  </div>
+
+</div>
+<div class="container py-4">
+
+  <h5 class="mb-3">Home Intro – Admin</h5>
+
+  <!-- FORM -->
+  <form [formGroup]="form" (ngSubmit)="submit()" class="card p-3 mb-4">
+    <div class="row g-3">
+
+      <div class="col-md-4">
+        <input class="form-control" placeholder="Name" formControlName="nameText">
+      </div>
+
+      <div class="col-md-4">
+        <input class="form-control" placeholder="Post" formControlName="postText">
+      </div>
+
+      <div class="col-md-4">
+        <input class="form-control" placeholder="Intro Text" formControlName="introText">
+      </div>
+
+      <div class="col-md-12">
+        <input type="file" multiple class="form-control" (change)="onFileChange($event)">
+      </div>
+
+      <div class="col-md-12 text-end">
+        <button class="btn btn-primary">
+          {{ editId ? 'Update' : 'Add' }}
+        </button>
+      </div>
+
+    </div>
+  </form>
+
+  <!-- TABLE -->
+  <table class="table table-bordered align-middle">
+    <thead class="table-light">
+      <tr>
+        <th>Images</th>
+        <th>Name</th>
+        <th>Post</th>
+        <th>Intro</th>
+        <th width="150">Actions</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr *ngFor="let i of list">
+        <td>
+          <img *ngFor="let img of i.images"
+               [src]="img"
+               width="40"
+               class="me-1 rounded">
+        </td>
+        <td>{{ i.nameText }}</td>
+        <td>{{ i.postText }}</td>
+        <td>{{ i.introText }}</td>
+        <td>
+          <button class="btn btn-sm btn-warning me-1" (click)="edit(i)">Edit</button>
+          <button class="btn btn-sm btn-danger" (click)="delete(i.id)">Delete</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+</div>
+
+
+
+

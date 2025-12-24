@@ -26,6 +26,7 @@ import { AngularFireStorageModule } from '@angular/fire/compat/storage';
 import { environment } from '../environments/environment';
 import { VerifyEmailComponent } from './auth/verify-email/verify-email.component';
 import { ForgotPasswordComponent } from './auth/forgot-password/forgot-password.component';
+import { HomeAdminComponent } from './component/home-admin/home-admin.component';
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
 }
@@ -46,7 +47,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     RegisterComponent,
     SignInComponent,
     VerifyEmailComponent,
-    ForgotPasswordComponent
+    ForgotPasswordComponent,
+    HomeAdminComponent
   ],
   imports: [
     ReactiveFormsModule,

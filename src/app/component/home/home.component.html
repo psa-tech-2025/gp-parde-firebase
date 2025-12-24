@@ -25,37 +25,39 @@
         </div>
       </div>
     </div>
-    <div class="container py-5">
-      <div class="row g-4">
-        <!-- Notice Board -->
-        <div class="col-md-6">
-          <div class="card custom-card p-4">
-            <h5 class="card-title">{{ 'noticeBoard.title' | translate }}</h5>
-            <div class="card-body p-0">
-              <div *ngFor="let item of ('noticeBoard.list' | translate)">
-                <p>{{ item }}</p>
-              </div>
-            </div>
-          </div>
-        </div>
+<div class="container py-5">
+  <div class="row g-4">
 
-        <!-- Announcements -->
-        <div class="col-md-6">
-          <div class="card custom-card p-4">
-            <h5 class="card-title">{{ 'announcements.title' | translate }}</h5>
-            <div class="card-body p-0">
-               <div *ngFor="let item of ('announcements.list' | translate)">
-                <p>{{ item }}</p>
-              </div>
-              <!-- <p>{{ 'announcements.line1' | translate }}</p>
-              <hr>
-              <p>{{ 'announcements.line2' | translate }}</p> -->
-            </div>
+    <!-- Notice Board -->
+    <div class="col-md-6">
+      <div class="card custom-card p-4">
+        <h5 class="card-title">सूचना फलक</h5>
+        <div class="card-body p-0">
+          <div *ngFor="let item of notices">
+            <!-- ✅ FIX HERE -->
+            <p>{{ item.text }}</p>
           </div>
         </div>
       </div>
     </div>
-    <div class="container py-5">
+
+    <!-- Announcements -->
+    <div class="col-md-6">
+      <div class="card custom-card p-4">
+        <h5 class="card-title">घोषणा</h5>
+        <div class="card-body p-0">
+          <div *ngFor="let item of announcements">
+            <!-- ✅ FIX HERE -->
+            <p>{{ item.text }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+      <!-- <div class="container py-5">
       <h2 class="section-title">{{ 'chiefOfficer.title' | translate }}</h2>
       <div class="row text-center justify-content-center mt-4">
         <div class="col-md-4 mb-4 officer-card" *ngFor="let officer of ('chiefOfficer.officers' | translate)">
@@ -64,9 +66,35 @@
           <div class="officer-title">{{ officer.post }}</div>
         </div>
       </div>
-    </div>
+    </div> -->
+<div class="container py-5">
+  <h2 class="section-title">{{ 'chiefOfficer.title' | translate }}</h2>
 
-    <div class="container py-5">
+  <div class="row text-center justify-content-center mt-4">
+    <div class="col-md-6 mb-4 officer-card" *ngFor="let list of members">
+
+      <!-- MULTIPLE IMAGES -->
+      <img *ngFor="let img of list.images"
+           [src]="img"
+           [alt]="list.nameText"
+           class="officer-img">
+
+      <div class="officer-name">
+        {{ list.nameText }}
+      </div>
+
+      <div class="officer-title">
+        {{ list.postText }}
+      </div>
+
+    </div>
+  </div>
+</div>
+
+
+
+
+    <!-- <div class="container py-5">
       <h2 class="section-title">{{ 'members.title' | translate }}</h2>
       <div class="row text-center justify-content-center mt-4">
         <div class="col-md-4 mb-4 officer-card" *ngFor="let list of ('members.list' | translate)">
@@ -75,7 +103,7 @@
           <div class="officer-title">{{ list.post }}</div>
         </div>
       </div>
-    </div>
+    </div> -->
     <!-- //////////// -->
     <div class="container py-5">
       <h2 class="text-center fw-bold mb-4" style="color: #a51919;">
@@ -85,13 +113,13 @@
       <div class="row g-4 text-center">
 
         <!-- 1 -->
-        <div class="col-6 col-md-4 col-lg-3">
+        <!-- <div class="col-6 col-md-4 col-lg-3">
           <div class="p-3 border rounded shadow-sm bg-white h-100">
             <div class="mb-2"><i class="bi bi-house-fill fs-2"></i></div>
             <div>{{ 'geoInfo.villages.label' | translate }}</div>
             <div class="fw-bold text-danger fs-4">{{ 'geoInfo.villages.value' | translate }}</div>
           </div>
-        </div>
+        </div> -->
 
         <!-- 2 -->
         <div class="col-6 col-md-4 col-lg-3">
@@ -112,22 +140,22 @@
         </div>
 
         <!-- 4 -->
-        <div class="col-6 col-md-4 col-lg-3">
+        <!-- <div class="col-6 col-md-4 col-lg-3">
           <div class="p-3 border rounded shadow-sm bg-white h-100">
             <div class="mb-2"><i class="bi bi-house-door-fill fs-2"></i></div>
             <div>{{ 'geoInfo.gramPanchayats.label' | translate }}</div>
             <div class="fw-bold text-danger fs-4">{{ 'geoInfo.gramPanchayats.value' | translate }}</div>
           </div>
-        </div>
+        </div> -->
 
         <!-- 5 -->
-        <div class="col-6 col-md-4 col-lg-3">
+        <!-- <div class="col-6 col-md-4 col-lg-3">
           <div class="p-3 border rounded shadow-sm bg-white h-100">
             <div class="mb-2"><i class="bi bi-house-door-fill fs-2"></i></div>
             <div>{{ 'geoInfo.municipalCouncil.label' | translate }}</div>
             <div class="fw-bold text-danger fs-4">{{ 'geoInfo.municipalCouncil.value' | translate }}</div>
           </div>
-        </div>
+        </div> -->
 
         <!-- 6 -->
         <div class="col-6 col-md-4 col-lg-3">
@@ -157,22 +185,22 @@
         </div>
 
         <!-- 9 -->
-        <div class="col-6 col-md-4 col-lg-3">
+        <!-- <div class="col-6 col-md-4 col-lg-3">
           <div class="p-3 border rounded shadow-sm bg-white h-100">
             <div class="mb-2"><i class="bi bi-hospital-fill fs-2"></i></div>
             <div>{{ 'geoInfo.hospitals.label' | translate }}</div>
             <div class="fw-bold text-danger fs-4">{{ 'geoInfo.hospitals.value' | translate }}</div>
           </div>
-        </div>
+        </div> -->
 
         <!-- 10 -->
-        <div class="col-6 col-md-4 col-lg-3">
+        <!-- <div class="col-6 col-md-4 col-lg-3">
           <div class="p-3 border rounded shadow-sm bg-white h-100">
             <div class="mb-2"><i class="bi bi-building fs-2"></i></div>
             <div>{{ 'geoInfo.veterinary.label' | translate }}</div>
             <div class="fw-bold text-danger fs-4">{{ 'geoInfo.veterinary.value' | translate }}</div>
           </div>
-        </div>
+        </div> -->
 
         <!-- 11 -->
         <div class="col-6 col-md-4 col-lg-3">
@@ -293,19 +321,32 @@
     </div>
 
     <!-- //////////////// -->
-    <div class="container my-5">
-      <h2 class="text-center mb-4" style="color: #800000;">ग्रामपंचायत वाशी गॅलरी</h2>
-      <hr style="border-top: 2px solid #800000; width: 90%; margin: 0 auto 30px auto;">
+  <div class="container my-5">
+  <h2 class="text-center mb-4" style="color: #800000;">
+    ग्रामपंचायत वाशी गॅलरी
+  </h2>
 
-      <div class="row g-4 justify-content-center">
-        <div class="col-12 col-sm-6 col-md-4 col-lg-3" *ngFor="let image of images" (click)="navigateToGallery()"
-          style="cursor: pointer;">
-          <div class="card shadow-sm h-100">
-            <img [src]="image.url" class="card-img-top" alt="Gallery Image">
-          </div>
-        </div>
+  <hr style="border-top: 2px solid #800000; width: 90%; margin: 0 auto 30px auto;">
+
+  <div class="row g-4 justify-content-center">
+    <div
+      class="col-12 col-sm-6 col-md-4 col-lg-3"
+      *ngFor="let image of images"
+      (click)="navigateToGallery()"
+      style="cursor: pointer;"
+    >
+      <div class="card shadow-sm h-100">
+        <!-- ✅ ONLY IMAGE -->
+        <img
+          [src]="image.url"
+          class="card-img-top"
+          alt="Gallery Image"
+        />
       </div>
     </div>
+  </div>
+</div>
+
 
 
 

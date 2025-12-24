@@ -94,4 +94,56 @@
   .card img:hover {
     transform: scale(1.05);
   }
+  /* Officer Card */
+.officer-card {
+  background: #ffffff;
+  border-radius: 14px;
+  padding: 20px;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.08);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.officer-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 12px 28px rgba(0,0,0,0.15);
+}
+
+/* Officer Images */
+.officer-img {
+  width: 100%;
+  height: 260px;
+  object-fit: cover;
+  border-radius: 12px;
+  margin-bottom: 12px;
+}
+
+/* Name */
+.officer-name {
+  font-size: 1.25rem;
+  font-weight: 700;
+  margin-top: 10px;
+  color: #222;
+}
+
+/* Post */
+.officer-title {
+  font-size: 1rem;
+  font-weight: 500;
+  color: #666;
+}
+
+/* Mobile Optimization */
+@media (max-width: 768px) {
+  .officer-img {
+    height: 220px;
+  }
+}
+
+/* Extra small devices */
+@media (max-width: 480px) {
+  .officer-img {
+    height: 200px;
+  }
+}
+
   
