@@ -8,3 +8,130 @@ h2 {
   table {
     background-color: #fff;
   }
+
+  /* =========================
+   UNIVERSAL TABLE WRAPPER
+========================= */
+.table-responsive {
+  border: 2px solid #800000;
+  border-radius: 8px;
+  overflow-x: auto;
+  background: #fff;
+}
+
+/* =========================
+   TABLE BASE
+========================= */
+.table {
+  width: 100%;
+  border-collapse: collapse !important;
+  font-size: 0.95rem;
+  min-width: 600px;
+}
+
+/* =========================
+   TABLE HEADER
+========================= */
+.table thead th {
+  border: 1.5px solid #800000 !important;
+  background-color: #f5f5f5 !important;
+  color: #800000 !important;
+  font-weight: 600;
+  padding: 10px 8px;
+  text-align: center;
+  white-space: nowrap;
+}
+
+/* =========================
+   TABLE BODY
+========================= */
+.table tbody td {
+  border: 1px solid #ccc !important;
+  padding: 8px 8px;
+  vertical-align: middle;
+  text-align: center;
+  background-color: #fff;
+  white-space: nowrap;
+}
+
+/* Description column readability */
+.table tbody td:nth-child(2) {
+  white-space: normal;
+  max-width: 380px;
+}
+
+/* Zebra rows */
+.table tbody tr:nth-child(even) td {
+  background-color: #fafafa;
+}
+
+/* Desktop hover */
+@media (min-width: 768px) {
+  .table tbody tr:hover td {
+    background-color: #fff0f0;
+  }
+}
+
+/* =========================
+   DOWNLOAD LINK
+========================= */
+.table tbody a {
+  text-decoration: none;
+  font-size: 0.85rem;
+}
+
+.table tbody a:hover {
+  text-decoration: underline;
+}
+
+/* =========================
+   ACTION BUTTONS
+========================= */
+.table tbody .btn {
+  font-size: 0.72rem;
+  padding: 4px 8px;
+}
+
+.table tbody .btn-warning {
+  background-color: #ffc107;
+  border: none;
+}
+
+.table tbody .btn-danger {
+  background-color: #dc3545;
+  border: none;
+}
+
+/* =========================
+   TABLET VIEW
+========================= */
+@media (max-width: 992px) {
+  .table {
+    font-size: 0.9rem;
+  }
+
+  .table thead th,
+  .table tbody td {
+    padding: 7px 6px;
+  }
+}
+
+/* =========================
+   MOBILE VIEW
+========================= */
+@media (max-width: 576px) {
+  .table {
+    font-size: 0.85rem;
+    min-width: 520px;
+  }
+
+  .table thead th,
+  .table tbody td {
+    padding: 6px 5px;
+  }
+
+  .table tbody .btn {
+    font-size: 0.68rem;
+    padding: 3px 6px;
+  }
+}

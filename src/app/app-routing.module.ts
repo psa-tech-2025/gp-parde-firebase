@@ -21,9 +21,9 @@ const routes: Routes = [
   {
     path:'gallery', component: GalleryComponent
   },
-  {
-    path:'about-citizens', component:AboutCitizonComponent
-  },
+  // {
+  //   path:'about-citizens', component:AboutCitizonComponent
+  // },
   {
     path:'officers', component:OFFICERSComponent
   },

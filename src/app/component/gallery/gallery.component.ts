@@ -16,6 +16,7 @@ export class GalleryComponent implements OnInit {
   selectedFile!: File;
   description = '';
   editId: string | null = null;
+  selectedImage: any = null;
 
   constructor(
     private gp: GpContentService,
@@ -88,4 +89,13 @@ export class GalleryComponent implements OnInit {
     this.description = '';
     this.selectedFile = undefined as any;
   }
+  openModal(image: any) {
+  this.selectedImage = image;
+  document.body.style.overflow = 'hidden'; // disable background scroll
+}
+
+closeModal() {
+  this.selectedImage = null;
+  document.body.style.overflow = 'auto';
+}
 }

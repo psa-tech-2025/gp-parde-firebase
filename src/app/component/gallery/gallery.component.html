@@ -16,30 +16,57 @@
 
   <!-- 🖼️ PUBLIC GALLERY -->
   <h2 class="text-center mb-4" style="color: #800000;">
-    ग्रामपंचायत वाशी गॅलरी
+    ग्रामपंचायत बावी गॅलरी
   </h2>
 
   <div class="row g-4">
-    <div class="col-12 col-sm-6 col-md-4" *ngFor="let image of images">
-      <div class="card shadow-sm h-100">
+  <div class="col-12 col-sm-6 col-md-4" *ngFor="let image of images">
+  <div class="card shadow-sm h-100 position-relative">
 
-        <img [src]="image.url" class="card-img-top">
+    <!-- Image -->
+    <img
+      [src]="image.url"
+      class="card-img-top gallery-img"
+      (click)="openModal(image)"
+    />
 
-        <div class="card-body">
-          <p class="card-text text-center">{{ image.description }}</p>
+    <!-- View Icon (Public) -->
+    <button
+      class="btn btn-dark view-icon"
+      (click)="openModal(image)"
+      title="View Image"
+    >
+      <i class="fa fa-eye"></i>
+    </button>
 
-          <!-- ADMIN ACTIONS -->
-          <div *ngIf="isAdmin" class="text-center">
-            <button class="btn btn-sm btn-warning me-1" (click)="edit(image)">
-              Edit
-            </button>
-            <button class="btn btn-sm btn-danger" (click)="delete(image.id)">
-              Delete
-            </button>
-          </div>
-        </div>
+    <div class="card-body">
+      <p class="card-text text-center">{{ image.description }}</p>
 
+      <!-- ADMIN ACTIONS -->
+      <div *ngIf="isAdmin" class="text-center">
+        <button class="btn btn-sm btn-warning me-1" (click)="edit(image)">
+          Edit
+        </button>
+        <button class="btn btn-sm btn-danger" (click)="delete(image.id)">
+          Delete
+        </button>
       </div>
     </div>
+
+  </div>
+</div>
+<!-- IMAGE VIEW MODAL -->
+<div class="image-modal" *ngIf="selectedImage">
+  <span class="close-btn" (click)="closeModal()">&times;</span>
+
+  <img
+    [src]="selectedImage.url"
+    class="modal-img"
+  />
+
+  <p class="modal-desc">{{ selectedImage.description }}</p>
+</div>
+
+
   </div>
 </div>

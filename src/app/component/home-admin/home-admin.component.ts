@@ -34,10 +34,26 @@ selectedImages: File[] = [];
   images: File[] = [];
   editId: string | null = null;
   uid!: string;
+    mapForm!: FormGroup;
+  maps: any[] = [];
+  editMapId: string | null = null;
+    // isAdmin = true; // already in your app
+  rows  = [];
+
+  // editId: string | null = null;
+    geoList: any[] = [];
+      formm = {
+    key: '',
+    label: '',
+    value: '',
+    icon: '',
+    order: 0
+  };
 
 
 
   constructor(
+      
     private gp: GpContentService,
     private auth: AuthService,
       private afAuth: AngularFireAuth,
@@ -64,6 +80,51 @@ selectedImages: File[] = [];
     });
 
     this.load();
+        this.mapForm = this.fb.group({
+      title: ['', Validators.required],
+      address: [''],
+        mapEmbedUrl: ['', Validators.required], // ✅ iframe URL
+      mapLink: ['']                           // ✅ open link
+    });
+
+    this.loadMaps();
+  }
+    loadMaps() {
+    this.gp.getHomeMap().subscribe(res => {
+      this.maps = res;
+    });
+  }
+    submitMap() {
+    if (this.mapForm.invalid) return;
+
+    if (this.editMapId) {
+      this.gp.updateHomeMap(this.editMapId, this.mapForm.value);
+    } else {
+      this.gp.addHomeMap(this.mapForm.value);
+    }
+
+    this.resetMapForm();
+  }
+
+  editMap(item: any) {
+    this.editMapId = item.id;
+    this.mapForm.patchValue({
+      title: item.title,
+      address: item.address,
+      mapEmbedUrl: item.mapEmbedUrl,
+      mapLink: item.mapLink
+    });
+  }
+
+  deleteMap(id: string) {
+    if (confirm('Delete this map?')) {
+      this.gp.deleteHomeMap(id);
+    }
+  }
+
+  resetMapForm() {
+    this.mapForm.reset();
+    this.editMapId = null;
   }
   load() {
     this.gp.getHomeIntro().subscribe(res => this.list = res);

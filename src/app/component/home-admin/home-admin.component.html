@@ -111,6 +111,81 @@
 
 </div>
 
+<!-- GOOGLE MAP ADMIN -->
+<!-- GOOGLE MAP FORM -->
+<div class="card p-3 mb-4">
+  <h5 class="mb-3">Home – Google Map</h5>
+
+  <form [formGroup]="mapForm" (ngSubmit)="submitMap()">
+    <div class="row g-3">
+
+      <div class="col-md-4">
+        <input class="form-control" placeholder="Title" formControlName="title">
+      </div>
+
+      <div class="col-md-4">
+        <input class="form-control" placeholder="Address" formControlName="address">
+      </div>
+
+      <div class="col-md-12">
+        <input class="form-control mb-2"
+               placeholder="Google Map Embed URL"
+               formControlName="mapEmbedUrl">
+
+        <input class="form-control"
+               placeholder="Google Map Open Link"
+               formControlName="mapLink">
+      </div>
+
+      <div class="col-md-12 text-end">
+        <button class="btn btn-primary">
+          {{ editMapId ? 'Update Map' : 'Add Map' }}
+        </button>
+      </div>
+
+    </div>
+  </form>
+</div>
+
+<!-- MAP TABLE -->
+<div class="table-responsive">
+  <table class="table table-bordered align-middle">
+    <thead class="table-light">
+      <tr>
+        <th>Title</th>
+        <th>Address</th>
+        <th>Preview</th>
+        <th width="160">Action</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr *ngFor="let m of maps">
+        <td>{{ m.title }}</td>
+        <td>{{ m.address }}</td>
+        <td width="300">
+          <iframe
+            [src]="m.mapEmbedUrl | safeUrl"
+            width="100%"
+            height="150"
+            style="border:0;"
+            loading="lazy">
+          </iframe>
+        </td>
+        <td>
+          <button class="btn btn-sm btn-warning me-1" (click)="editMap(m)">
+            Edit
+          </button>
+          <button class="btn btn-sm btn-danger" (click)="deleteMap(m.id)">
+            Delete
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+
 
 
 

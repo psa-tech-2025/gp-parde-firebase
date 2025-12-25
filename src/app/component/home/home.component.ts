@@ -14,6 +14,7 @@ notices: any[] = [];
   announcements: any[] = [];
   images: any[] = [];
     members: any[] = [];
+     maps: any[] = [];
 
   // homePosts: any[];
   constructor( private router : Router,
@@ -44,8 +45,13 @@ notices: any[] = [];
        this.gp.getHomeIntro().subscribe(res => {
       this.members = res;
     });
-
+    
+      this.gp.getHomeMap().subscribe(res => {
+      this.maps = res;
+    });
   }
+
+  
    navigateToGallery() {
     this.router.navigate(['/gallery']);
   }

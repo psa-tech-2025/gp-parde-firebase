@@ -282,8 +282,82 @@ deleteHomeIntro(id: string) {
   return this.firestore.collection('homeIntro').doc(id).delete();
 }
 
+/* ================= HOME : GOOGLE MAP ================= */
+
+// READ (Public & Admin)
+getHomeMap() {
+  return this.firestore
+    .collection('homeMap', ref => ref.orderBy('createdAt', 'desc'))
+    .snapshotChanges()
+    .pipe(
+      map(actions =>
+        actions.map(a => ({
+          id: a.payload.doc.id,
+          ...a.payload.doc.data() as any
+        }))
+      )
+    );
+}
+
+// CREATE (Login only)
+addHomeMap(data: any) {
+  return this.firestore.collection('homeMap').add({
+    ...data,
+    createdAt: new Date()
+  });
+}
+
+// UPDATE (Login only)
+updateHomeMap(id: string, data: any) {
+  return this.firestore.collection('homeMap').doc(id).update({
+    ...data,
+    updatedAt: new Date()
+  });
+}
+
+// DELETE (Login only)
+deleteHomeMap(id: string) {
+  return this.firestore.collection('homeMap').doc(id).delete();
+}
 
 
+/* ================= HOME : GEO INFO ================= */
+
+// READ – Public & Admin
+getGeoInfo() {
+  return this.firestore
+    .collection('geoInfo', ref => ref.orderBy('order'))
+    .snapshotChanges()
+    .pipe(
+      map(actions =>
+        actions.map(a => ({
+          id: a.payload.doc.id,
+          ...a.payload.doc.data() as any
+        }))
+      )
+    );
+}
+
+// CREATE – Login only
+addGeoInfo(data: any) {
+  return this.firestore.collection('geoInfo').add({
+    ...data,
+    createdAt: new Date()
+  });
+}
+
+// UPDATE – Login only
+updateGeoInfo(id: string, data: any) {
+  return this.firestore.collection('geoInfo').doc(id).update({
+    ...data,
+    updatedAt: new Date()
+  });
+}
+
+// DELETE – Login only
+deleteGeoInfo(id: string) {
+  return this.firestore.collection('geoInfo').doc(id).delete();
+}
 
 
 

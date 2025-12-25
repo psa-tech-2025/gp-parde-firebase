@@ -1,116 +1,87 @@
 /* =========================
-   ADMIN FORM STYLING
+   ADMIN FORM (CLEAN CARD)
 ========================= */
 .container.bg-light {
-  background-color: #fff7f7 !important;
-  border-left: 4px solid #800000;
+  background: #ffffff !important;
+  border: 1px solid #e2e2e2;
+  border-left: 5px solid #800000;
+  border-radius: 10px;
 }
 
 .container.bg-light h6 {
-  letter-spacing: 0.4px;
+  letter-spacing: 0.5px;
+  margin-bottom: 12px;
 }
 
 .container.bg-light input {
-  height: 42px;
-  font-size: 0.9rem;
+  height: 44px;
+  font-size: 0.95rem;
+  border-radius: 6px;
 }
 
 .container.bg-light button {
-  min-width: 120px;
+  min-width: 130px;
+  font-size: 0.9rem;
+  border-radius: 6px;
 }
 
 /* =========================
-   TABLE WRAPPER
-========================= */
-.table-responsive {
-  border-radius: 8px;
-  overflow-x: auto;
-}
-
-/* =========================
-   TABLE BASE
+   FORCE TABLE BORDERS (BOOTSTRAP OVERRIDE)
 ========================= */
 .table {
-  background-color: #ffffff;
-  border-collapse: separate;
-  border-spacing: 0;
-  font-size: 0.95rem;
+  border-collapse: collapse !important;
+  border: 2px solid #800000 !important;
 }
 
-/* =========================
-   TABLE HEADER (THEAD)
-========================= */
+/* Header border */
+.table thead {
+  border: 2px solid #800000 !important;
+}
+
 .table thead th {
-  background-color: #f3f3f3;
-  color: #800000;
+  border: 1.5px solid #800000 !important;
+  background-color: #f5f5f5 !important;
+  color: #800000 !important;
   font-weight: 600;
-  text-transform: uppercase;
-  font-size: 0.85rem;
-  padding: 12px 10px;
-  border-bottom: 2px solid #800000;
-  vertical-align: middle;
 }
 
-/* =========================
-   TABLE BODY (TBODY)
-========================= */
+/* Body rows & cells */
+.table tbody {
+  border: 2px solid #800000 !important;
+}
+
 .table tbody tr {
-  transition: background-color 0.2s ease;
+  border: 1px solid #ccc !important;
 }
 
 .table tbody td {
-  padding: 10px 8px;
-  vertical-align: middle;
-  color: #333;
-  border-bottom: 1px solid #e6e6e6;
+  border: 1px solid #ccc !important;
+  background-color: #fff;
 }
 
-/* Zebra striping (tbody highlight) */
-.table tbody tr:nth-child(odd) {
+/* Zebra rows */
+.table tbody tr:nth-child(even) td {
   background-color: #fafafa;
 }
 
-/* Hover effect (desktop only) */
+/* Desktop hover */
 @media (min-width: 768px) {
-  .table tbody tr:hover {
-    background-color: #fff3f3;
+  .table tbody tr:hover td {
+    background-color: #fff0f0;
   }
 }
 
 /* =========================
-   ACTION BUTTONS
+   TABLE WRAPPER BORDER
 ========================= */
-.table tbody button {
-  font-size: 0.75rem;
-  padding: 4px 10px;
-  border-radius: 4px;
-}
-
-.table tbody .btn-warning {
-  background-color: #ffc107;
-  border: none;
-}
-
-.table tbody .btn-danger {
-  background-color: #dc3545;
-  border: none;
-}
+/* .table-responsive {
+  border: 2px solid #800000;
+  border-radius: 8px;
+  overflow: hidden;
+} */
 
 /* =========================
-   MOBILE RESPONSIVE (TABLE ONLY)
+   MOBILE VIEW (STACKED)
 ========================= */
-@media (max-width: 767px) {
-  .table {
-    font-size: 0.85rem;
-  }
 
-  .table thead th {
-    font-size: 0.8rem;
-    padding: 10px 6px;
-  }
 
-  .table tbody td {
-    padding: 8px 6px;
-    white-space: nowrap;
-  }
-}

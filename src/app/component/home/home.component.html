@@ -323,7 +323,7 @@
     <!-- //////////////// -->
   <div class="container my-5">
   <h2 class="text-center mb-4" style="color: #800000;">
-    ग्रामपंचायत वाशी गॅलरी
+    ग्रामपंचायत बावी गॅलरी
   </h2>
 
   <hr style="border-top: 2px solid #800000; width: 90%; margin: 0 auto 30px auto;">
@@ -346,6 +346,48 @@
     </div>
   </div>
 </div>
+  <div class="container py-5" *ngIf="maps.length">
+
+  <h2 class="section-title text-center mb-4">
+     आमचे स्थान
+  </h2>
+
+  <div class="row justify-content-center">
+    <div class="col-lg-10" *ngFor="let m of maps">
+
+      <div class="map-card">
+        <div class="row g-0">
+
+          <!-- ADDRESS -->
+          <div class="col-md-5 map-info">
+            <h5 class="map-title">{{ m.title }}</h5>
+            <p class="map-address">{{ m.address }}</p>
+
+            <a
+              [href]="m.mapLink"
+              target="_blank"
+              class="btn btn-outline-primary btn-sm mt-2">
+              Open in Google Maps
+            </a>
+          </div>
+
+          <!-- MAP -->
+          <!-- <div class="col-md-7 map-frame">
+            <iframe
+              [src]="m.mapEmbedUrl | safeUrl"
+              loading="lazy"
+              referrerpolicy="no-referrer-when-downgrade"
+              allowfullscreen>
+            </iframe>
+          </div> -->
+
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
 
 
 
