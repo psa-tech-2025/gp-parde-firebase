@@ -13,6 +13,7 @@ import { SignInComponent } from './auth/sign-in/sign-in.component';
 import { VerifyEmailComponent } from './auth/verify-email/verify-email.component';
 import { ForgotPasswordComponent } from './auth/forgot-password/forgot-password.component';
 import { HomeAdminComponent } from './component/home-admin/home-admin.component';
+import { AuthGuard } from './gaurd/auth.guard';
 
 const routes: Routes = [
   {
@@ -51,8 +52,8 @@ const routes: Routes = [
    {
      path: 'home-admin',
   component: HomeAdminComponent,
-  // canActivate: [AuthGuard]
-   }
+  
+   canActivate: [AuthGuard] }
 
 
 ];
