@@ -70,9 +70,14 @@
       </div>
 
       <div class="col-md-12 text-end">
-        <button class="btn btn-primary">
-          {{ editId ? 'Update' : 'Add' }}
-        </button>
+        <button
+  class="btn btn-primary"
+  type="submit"
+  [disabled]="isProcessing"
+>
+  {{ isProcessing ? 'Please wait...' : (editId ? 'Update' : 'Add') }}
+</button>
+
       </div>
 
     </div>
@@ -93,10 +98,13 @@
     <tbody>
       <tr *ngFor="let i of list">
         <td>
-          <img *ngFor="let img of i.images"
-               [src]="img"
-               width="40"
-               class="me-1 rounded">
+          <img
+  *ngIf="i.images?.length"
+  [src]="i.images[0]"
+  width="40"
+  class="rounded"
+/>
+
         </td>
         <td>{{ i.nameText }}</td>
         <td>{{ i.postText }}</td>

@@ -1,0 +1,63 @@
+.panchayat-title {
+  font-size: 1.9rem;              /* desktop default */
+  font-weight: 800;
+  letter-spacing: 1px;
+  color: #7a0000;                 /* maroon */
+  text-transform: uppercase;
+  position: relative;
+  display: inline-block;
+  padding-bottom: 8px;
+  margin: auto;
+}
+
+/* underline accent */
+.panchayat-title::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  transform: translateX(-50%);
+  width: 65%;
+  height: 3px;
+  background: linear-gradient(to right, #ffcc00, #ff9900);
+  border-radius: 2px;
+}
+
+/* ========================= */
+/* 📱 MOBILE (small phones) */
+/* ========================= */
+@media (max-width: 576px) {
+  .panchayat-title {
+    font-size: 1.35rem;
+    letter-spacing: 0.5px;
+    padding-bottom: 6px;
+  }
+
+  .panchayat-title::after {
+    width: 50%;
+    height: 2px;
+  }
+}
+
+/* ========================= */
+/* 📱📲 TABLET */
+/* ========================= */
+@media (min-width: 577px) and (max-width: 991px) {
+  .panchayat-title {
+    font-size: 1.6rem;
+    letter-spacing: 0.8px;
+  }
+
+  .panchayat-title::after {
+    width: 55%;
+  }
+}
+
+/* ========================= */
+/* 🖥️ LARGE DESKTOP */
+/* ========================= */
+@media (min-width: 1200px) {
+  .panchayat-title {
+    font-size: 2.1rem;
+  }
+}

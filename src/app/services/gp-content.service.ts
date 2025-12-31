@@ -6,360 +6,398 @@ import { map } from 'rxjs/operators';
 @Injectable({ providedIn: 'root' })
 export class GpContentService {
 
+  // 🔑 ROOT FOLDER (ONLY CHANGE POINT)
+  private readonly ROOT = 'sendi';
+// store old images during edit
   constructor(
     private firestore: AngularFirestore,
     private storage: AngularFireStorage
   ) {}
 
-  /* -------------------- STORAGE -------------------- */
+  /* ==================== STORAGE ==================== */
 
   uploadFile(folder: string, file: File) {
-    const path = `gp/${folder}/${Date.now()}_${file.name}`;
+    const path = `${this.ROOT}/${folder}/${Date.now()}_${file.name}`;
     const ref = this.storage.ref(path);
     return this.storage.upload(path, file).then(() => ref.getDownloadURL());
   }
 
-  /* -------------------- FIRESTORE CRUD -------------------- */
-
-  // CREATE
-  addItem(collection: string, data: any) {
-    return this.firestore.collection(collection).add({
-      ...data,
-      createdAt: new Date()
-    });
-  }
-
-  // READ
-  getItems(collection: string) {
-    return this.firestore.collection(collection, ref =>
-      ref.orderBy('createdAt', 'desc')
-    ).snapshotChanges().pipe(
-      map(actions =>
-        actions.map(a => ({
-          id: a.payload.doc.id,
-          ...a.payload.doc.data() as any
-        }))
-      )
-    );
-  }
-
-  // UPDATE
-  updateItem(collection: string, id: string, data: any) {
-    return this.firestore.collection(collection).doc(id).update(data);
-  }
-
-  // DELETE
-  deleteItem(collection: string, id: string) {
-    return this.firestore.collection(collection).doc(id).delete();
-  }
-  // 📤 Upload image
   async uploadImage(file: File) {
-    const path = `gp/gallery/${Date.now()}_${file.name}`;
+    const path = `${this.ROOT}/gallery/${Date.now()}_${file.name}`;
     const ref = this.storage.ref(path);
     await this.storage.upload(path, file);
     return ref.getDownloadURL().toPromise();
   }
 
-  // ➕ Create
-  addGallery(data: any) {
-    return this.firestore.collection('gallery').add({
-      ...data,
-      createdAt: new Date()
-    });
+  /* ==================== COMMON CRUD ==================== */
+
+  addItem(collection: string, data: any) {
+    return this.firestore
+      .collection(`${this.ROOT}/${collection}/items`)
+      .add({ ...data, createdAt: new Date() });
   }
 
-  // 📥 Read (PUBLIC)
-  getGallery() {
-    return this.firestore.collection('gallery', ref =>
-      ref.orderBy('createdAt', 'desc')
-    ).snapshotChanges().pipe(
-      map(actions =>
-        actions.map(a => ({
-          id: a.payload.doc.id,
-          ...a.payload.doc.data() as any
-        }))
+  getItems(collection: string) {
+    return this.firestore
+      .collection(`${this.ROOT}/${collection}/items`, ref =>
+        ref.orderBy('createdAt', 'desc')
       )
-    );
+      .snapshotChanges()
+      .pipe(
+        map(actions =>
+          actions.map(a => ({
+            id: a.payload.doc.id,
+            ...a.payload.doc.data() as any
+          }))
+        )
+      );
   }
 
-  // ✏️ Update
+  updateItem(collection: string, id: string, data: any) {
+    return this.firestore
+      .doc(`${this.ROOT}/${collection}/items/${id}`)
+      .update(data);
+  }
+
+  deleteItem(collection: string, id: string) {
+    return this.firestore
+      .doc(`${this.ROOT}/${collection}/items/${id}`)
+      .delete();
+  }
+
+  /* ==================== GALLERY ==================== */
+
+  addGallery(data: any) {
+    return this.firestore
+      .collection(`${this.ROOT}/gallery/items`)
+      .add({ ...data, createdAt: new Date() });
+  }
+
+  getGallery() {
+    return this.firestore
+      .collection(`${this.ROOT}/gallery/items`, ref =>
+        ref.orderBy('createdAt', 'desc')
+      )
+      .snapshotChanges()
+      .pipe(
+        map(actions =>
+          actions.map(a => ({
+            id: a.payload.doc.id,
+            ...a.payload.doc.data() as any
+          }))
+        )
+      );
+  }
+
   updateGallery(id: string, data: any) {
-    return this.firestore.collection('gallery').doc(id).update(data);
+    return this.firestore
+      .doc(`${this.ROOT}/gallery/items/${id}`)
+      .update(data);
   }
 
-  // ❌ Delete
   deleteGallery(id: string) {
-    return this.firestore.collection('gallery').doc(id).delete();
+    return this.firestore
+      .doc(`${this.ROOT}/gallery/items/${id}`)
+      .delete();
   }
+
+  /* ==================== OFFICERS ==================== */
 
   getOfficers() {
-  return this.firestore.collection('officers', ref =>
-    ref.orderBy('createdAt')
-  ).snapshotChanges().pipe(
-    map(actions =>
-      actions.map(a => ({
-        id: a.payload.doc.id,
-        ...a.payload.doc.data() as any
-      }))
-    )
-  );
-}
-
-addOfficer(data: any) {
-  return this.firestore.collection('officers').add({
-    ...data,
-    createdAt: new Date()
-  });
-}
-
-updateOfficer(id: string, data: any) {
-  return this.firestore.collection('officers').doc(id).update(data);
-}
-
-deleteOfficer(id: string) {
-  return this.firestore.collection('officers').doc(id).delete();
-}
-// gp-content.service.ts
-getSchemes() {
-  return this.firestore
-    .collection('schemes', ref => ref.orderBy('createdAt', 'desc'))
-    .valueChanges({ idField: 'id' });
-}
-
-addScheme(data: any) {
-  return this.firestore.collection('schemes').add({
-    ...data,
-    createdAt: new Date()
-  });
-}
-
-updateScheme(id: string, data: any) {
-  return this.firestore.collection('schemes').doc(id).update(data);
-}
-
-deleteScheme(id: string) {
-  return this.firestore.collection('schemes').doc(id).delete();
-}
-// gp-content.service.ts
-
-getAbout() {
-  return this.firestore.doc('about/main').valueChanges();
-}
-
-updateAbout(data: any) {
-  return this.firestore.doc('about/main').set(data, { merge: true });
-}
-// gp-content.service.ts
-
-getReports() {
-  return this.firestore
-    .collection('reports', ref => ref.orderBy('title'))
-    .valueChanges({ idField: 'id' });
-}
-
-addReport(data: any) {
-  return this.firestore.collection('reports').add(data);
-}
-
-updateReport(id: string, data: any) {
-  return this.firestore.doc(`reports/${id}`).update(data);
-}
-
-deleteReport(id: string) {
-  return this.firestore.doc(`reports/${id}`).delete();
-}
-
-// gp-content.service.ts
-
-getCitizenInfo() {
-  return this.firestore.doc('citizenInfo/main').valueChanges();
-}
-
-updateCitizenInfo(data: any) {
-  return this.firestore.doc('citizenInfo/main')
-    .set(data, { merge: true });
-}
-/* ================= HOME : NOTICE BOARD ================= */
-
-getHomeNotices() {
-  return this.firestore
-    .collection('homeNotices', ref => ref.orderBy('createdAt', 'desc'))
-    .snapshotChanges()
-    .pipe(
-      map(actions =>
-        actions.map(a => ({
-          id: a.payload.doc.id,
-          ...a.payload.doc.data() as any
-        }))
+    return this.firestore
+      .collection(`${this.ROOT}/officers/items`, ref =>
+        ref.orderBy('createdAt')
       )
-    );
-}
+      .snapshotChanges()
+      .pipe(
+        map(actions =>
+          actions.map(a => ({
+            id: a.payload.doc.id,
+            ...a.payload.doc.data() as any
+          }))
+        )
+      );
+  }
 
-addHomeNotice(text: string) {
-  return this.firestore.collection('homeNotices').add({
-    text,
-    createdAt: new Date()
-  });
-}
+  addOfficer(data: any) {
+    return this.firestore
+      .collection(`${this.ROOT}/officers/items`)
+      .add({ ...data, createdAt: new Date() });
+  }
 
-updateHomeNotice(id: string, text: string) {
-  return this.firestore.collection('homeNotices').doc(id).update({ text });
-}
+  updateOfficer(id: string, data: any) {
+    return this.firestore
+      .doc(`${this.ROOT}/officers/items/${id}`)
+      .update(data);
+  }
 
-deleteHomeNotice(id: string) {
-  return this.firestore.collection('homeNotices').doc(id).delete();
-}
+  deleteOfficer(id: string) {
+    return this.firestore
+      .doc(`${this.ROOT}/officers/items/${id}`)
+      .delete();
+  }
 
+  /* ==================== SCHEMES ==================== */
 
-/* ================= HOME : ANNOUNCEMENTS ================= */
-
-getHomeAnnouncements() {
-  return this.firestore
-    .collection('homeAnnouncements', ref => ref.orderBy('createdAt', 'desc'))
-    .snapshotChanges()
-    .pipe(
-      map(actions =>
-        actions.map(a => ({
-          id: a.payload.doc.id,
-          ...a.payload.doc.data() as any
-        }))
+  getSchemes() {
+    return this.firestore
+      .collection(`${this.ROOT}/schemes/items`, ref =>
+        ref.orderBy('createdAt', 'desc')
       )
-    );
-}
+      .valueChanges({ idField: 'id' });
+  }
 
-addHomeAnnouncement(text: string) {
-  return this.firestore.collection('homeAnnouncements').add({
-    text,
-    createdAt: new Date()
-  });
-}
+  addScheme(data: any) {
+    return this.firestore
+      .collection(`${this.ROOT}/schemes/items`)
+      .add({ ...data, createdAt: new Date() });
+  }
 
-updateHomeAnnouncement(id: string, text: string) {
-  return this.firestore.collection('homeAnnouncements').doc(id).update({ text });
-}
+  updateScheme(id: string, data: any) {
+    return this.firestore
+      .doc(`${this.ROOT}/schemes/items/${id}`)
+      .update(data);
+  }
 
-deleteHomeAnnouncement(id: string) {
-  return this.firestore.collection('homeAnnouncements').doc(id).delete();
-}
+  deleteScheme(id: string) {
+    return this.firestore
+      .doc(`${this.ROOT}/schemes/items/${id}`)
+      .delete();
+  }
 
+  /* ==================== ABOUT ==================== */
 
-/* ================= HOME : INTRO / OFFICERS ================= */
+  getAbout() {
+    return this.firestore
+      .doc(`${this.ROOT}/about/main`)
+      .valueChanges();
+  }
 
-// READ – Public (Home page)
-getHomeIntro() {
-  return this.firestore
-    .collection('homeIntro', ref => ref.orderBy('createdAt', 'desc'))
-    .snapshotChanges()
-    .pipe(
-      map(actions =>
-        actions.map(a => ({
-          id: a.payload.doc.id,
-          ...a.payload.doc.data() as any
-        }))
+  updateAbout(data: any) {
+    return this.firestore
+      .doc(`${this.ROOT}/about/main`)
+      .set(data, { merge: true });
+  }
+
+  /* ==================== REPORTS ==================== */
+
+  getReports() {
+    return this.firestore
+      .collection(`${this.ROOT}/reports/items`, ref =>
+        ref.orderBy('title')
       )
-    );
-}
+      .valueChanges({ idField: 'id' });
+  }
 
-// CREATE – Login only
-addHomeIntro(data: any, uid: string) {
-  return this.firestore.collection('homeIntro').add({
-    ...data,
-    createdBy: uid,
-    createdAt: new Date()
-  });
-}
+  addReport(data: any) {
+    return this.firestore
+      .collection(`${this.ROOT}/reports/items`)
+      .add(data);
+  }
 
-// UPDATE – Login only
-updateHomeIntro(id: string, data: any) {
-  return this.firestore.collection('homeIntro').doc(id).update({
-    ...data,
-    updatedAt: new Date()
-  });
-}
+  updateReport(id: string, data: any) {
+    return this.firestore
+      .doc(`${this.ROOT}/reports/items/${id}`)
+      .update(data);
+  }
 
-// DELETE – Login only
-deleteHomeIntro(id: string) {
-  return this.firestore.collection('homeIntro').doc(id).delete();
-}
+  deleteReport(id: string) {
+    return this.firestore
+      .doc(`${this.ROOT}/reports/items/${id}`)
+      .delete();
+  }
 
-/* ================= HOME : GOOGLE MAP ================= */
+  /* ==================== CITIZEN INFO ==================== */
 
-// READ (Public & Admin)
-getHomeMap() {
-  return this.firestore
-    .collection('homeMap', ref => ref.orderBy('createdAt', 'desc'))
-    .snapshotChanges()
-    .pipe(
-      map(actions =>
-        actions.map(a => ({
-          id: a.payload.doc.id,
-          ...a.payload.doc.data() as any
-        }))
+  getCitizenInfo() {
+    return this.firestore
+      .doc(`${this.ROOT}/citizenInfo/main`)
+      .valueChanges();
+  }
+
+  updateCitizenInfo(data: any) {
+    return this.firestore
+      .doc(`${this.ROOT}/citizenInfo/main`)
+      .set(data, { merge: true });
+  }
+
+  /* ==================== HOME : NOTICES ==================== */
+
+  getHomeNotices() {
+    return this.firestore
+      .collection(`${this.ROOT}/homeNotices/items`, ref =>
+        ref.orderBy('createdAt', 'desc')
       )
-    );
-}
+      .snapshotChanges()
+      .pipe(
+        map(actions =>
+          actions.map(a => ({
+            id: a.payload.doc.id,
+            ...a.payload.doc.data() as any
+          }))
+        )
+      );
+  }
 
-// CREATE (Login only)
-addHomeMap(data: any) {
-  return this.firestore.collection('homeMap').add({
-    ...data,
-    createdAt: new Date()
-  });
-}
+  addHomeNotice(text: string) {
+    return this.firestore
+      .collection(`${this.ROOT}/homeNotices/items`)
+      .add({ text, createdAt: new Date() });
+  }
 
-// UPDATE (Login only)
-updateHomeMap(id: string, data: any) {
-  return this.firestore.collection('homeMap').doc(id).update({
-    ...data,
-    updatedAt: new Date()
-  });
-}
+  updateHomeNotice(id: string, text: string) {
+    return this.firestore
+      .doc(`${this.ROOT}/homeNotices/items/${id}`)
+      .update({ text });
+  }
 
-// DELETE (Login only)
-deleteHomeMap(id: string) {
-  return this.firestore.collection('homeMap').doc(id).delete();
-}
+  deleteHomeNotice(id: string) {
+    return this.firestore
+      .doc(`${this.ROOT}/homeNotices/items/${id}`)
+      .delete();
+  }
 
+  /* ==================== HOME : ANNOUNCEMENTS ==================== */
 
-/* ================= HOME : GEO INFO ================= */
-
-// READ – Public & Admin
-getGeoInfo() {
-  return this.firestore
-    .collection('geoInfo', ref => ref.orderBy('order'))
-    .snapshotChanges()
-    .pipe(
-      map(actions =>
-        actions.map(a => ({
-          id: a.payload.doc.id,
-          ...a.payload.doc.data() as any
-        }))
+  getHomeAnnouncements() {
+    return this.firestore
+      .collection(`${this.ROOT}/homeAnnouncements/items`, ref =>
+        ref.orderBy('createdAt', 'desc')
       )
-    );
-}
+      .snapshotChanges()
+      .pipe(
+        map(actions =>
+          actions.map(a => ({
+            id: a.payload.doc.id,
+            ...a.payload.doc.data() as any
+          }))
+        )
+      );
+  }
 
-// CREATE – Login only
-addGeoInfo(data: any) {
-  return this.firestore.collection('geoInfo').add({
-    ...data,
-    createdAt: new Date()
-  });
-}
+  addHomeAnnouncement(text: string) {
+    return this.firestore
+      .collection(`${this.ROOT}/homeAnnouncements/items`)
+      .add({ text, createdAt: new Date() });
+  }
 
-// UPDATE – Login only
-updateGeoInfo(id: string, data: any) {
-  return this.firestore.collection('geoInfo').doc(id).update({
-    ...data,
-    updatedAt: new Date()
-  });
-}
+  updateHomeAnnouncement(id: string, text: string) {
+    return this.firestore
+      .doc(`${this.ROOT}/homeAnnouncements/items/${id}`)
+      .update({ text });
+  }
 
-// DELETE – Login only
-deleteGeoInfo(id: string) {
-  return this.firestore.collection('geoInfo').doc(id).delete();
-}
+  deleteHomeAnnouncement(id: string) {
+    return this.firestore
+      .doc(`${this.ROOT}/homeAnnouncements/items/${id}`)
+      .delete();
+  }
 
+  /* ==================== HOME : INTRO ==================== */
 
+  getHomeIntro() {
+    return this.firestore
+      .collection(`${this.ROOT}/homeIntro/items`, ref =>
+        ref.orderBy('createdAt', 'desc')
+      )
+      .snapshotChanges()
+      .pipe(
+        map(actions =>
+          actions.map(a => ({
+            id: a.payload.doc.id,
+            ...a.payload.doc.data() as any
+          }))
+        )
+      );
+  }
 
+  addHomeIntro(data: any, uid: string) {
+    return this.firestore
+      .collection(`${this.ROOT}/homeIntro/items`)
+      .add({ ...data, createdBy: uid, createdAt: new Date() });
+  }
 
+  updateHomeIntro(id: string, data: any) {
+    return this.firestore
+      .doc(`${this.ROOT}/homeIntro/items/${id}`)
+      .update({ ...data, updatedAt: new Date() });
+  }
+
+  deleteHomeIntro(id: string) {
+    return this.firestore
+      .doc(`${this.ROOT}/homeIntro/items/${id}`)
+      .delete();
+  }
+
+  /* ==================== HOME : MAP ==================== */
+
+  getHomeMap() {
+    return this.firestore
+      .collection(`${this.ROOT}/homeMap/items`, ref =>
+        ref.orderBy('createdAt', 'desc')
+      )
+      .snapshotChanges()
+      .pipe(
+        map(actions =>
+          actions.map(a => ({
+            id: a.payload.doc.id,
+            ...a.payload.doc.data() as any
+          }))
+        )
+      );
+  }
+
+  addHomeMap(data: any) {
+    return this.firestore
+      .collection(`${this.ROOT}/homeMap/items`)
+      .add({ ...data, createdAt: new Date() });
+  }
+
+  updateHomeMap(id: string, data: any) {
+    return this.firestore
+      .doc(`${this.ROOT}/homeMap/items/${id}`)
+      .update({ ...data, updatedAt: new Date() });
+  }
+
+  deleteHomeMap(id: string) {
+    return this.firestore
+      .doc(`${this.ROOT}/homeMap/items/${id}`)
+      .delete();
+  }
+
+  /* ==================== GEO INFO ==================== */
+
+  getGeoInfo() {
+    return this.firestore
+      .collection(`${this.ROOT}/geoInfo/items`, ref =>
+        ref.orderBy('order')
+      )
+      .snapshotChanges()
+      .pipe(
+        map(actions =>
+          actions.map(a => ({
+            id: a.payload.doc.id,
+            ...a.payload.doc.data() as any
+          }))
+        )
+      );
+  }
+
+  addGeoInfo(data: any) {
+    return this.firestore
+      .collection(`${this.ROOT}/geoInfo/items`)
+      .add({ ...data, createdAt: new Date() });
+  }
+
+  updateGeoInfo(id: string, data: any) {
+    return this.firestore
+      .doc(`${this.ROOT}/geoInfo/items/${id}`)
+      .update({ ...data, updatedAt: new Date() });
+  }
+
+  deleteGeoInfo(id: string) {
+    return this.firestore
+      .doc(`${this.ROOT}/geoInfo/items/${id}`)
+      .delete();
+  }
 }

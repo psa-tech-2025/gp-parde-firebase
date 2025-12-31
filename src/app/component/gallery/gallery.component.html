@@ -8,22 +8,26 @@
     <input type="text" class="form-control mb-2"
       placeholder="Image description"
       [(ngModel)]="description">
+<button
+  class="btn btn-danger"
+  (click)="save()"
+  [disabled]="isProcessing"
+>
+  {{ isProcessing ? 'Please wait...' : (editId ? 'Update' : 'Add') }}
+</button>
 
-    <button class="btn btn-danger" (click)="save()">
-      {{ editId ? 'Update' : 'Add' }}
-    </button>
   </div>
 
   <!-- 🖼️ PUBLIC GALLERY -->
   <h2 class="text-center mb-4" style="color: #800000;">
-    ग्रामपंचायत बावी गॅलरी
+    ग्रामपंचायत  शेंडी गॅलरी
   </h2>
 
   <div class="row g-4">
   <div class="col-12 col-sm-6 col-md-4" *ngFor="let image of images">
   <div class="card shadow-sm h-100 position-relative">
 
-    <!-- Image -->
+    <!-- Image -->`
     <img
       [src]="image.url"
       class="card-img-top gallery-img"

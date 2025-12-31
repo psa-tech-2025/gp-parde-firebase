@@ -82,10 +82,12 @@
     <div class="col-md-6 mb-4 officer-card" *ngFor="let list of members">
 
       <!-- MULTIPLE IMAGES -->
-      <img *ngFor="let img of list.images"
-           [src]="img"
-           [alt]="list.nameText"
-           class="officer-img">
+       <img
+        *ngIf="list.images?.length"
+        [src]="list.images[list.images.length - 1]"
+        [alt]="list.nameText"
+        class="officer-img"
+      />
 
       <div class="officer-name">
         {{ list.nameText }}
@@ -331,7 +333,7 @@
     <!-- //////////////// -->
   <div class="container my-5">
   <h2 class="text-center mb-4" style="color: #800000;">
-    ग्रामपंचायत बावी गॅलरी
+    ग्रामपंचायत  शेंडी गॅलरी
   </h2>
 
   <hr style="border-top: 2px solid #800000; width: 90%; margin: 0 auto 30px auto;">

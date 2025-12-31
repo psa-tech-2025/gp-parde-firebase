@@ -9,7 +9,8 @@ import { AngularFireAuth } from '@angular/fire/compat/auth';
   templateUrl: './home-admin.component.html'
 })
 export class HomeAdminComponent implements OnInit {
-
+  isProcessing = false;
+editingImages: string[] = []; 
   notices: any[] = [];
   announcements: any[] = [];
 
@@ -129,48 +130,105 @@ selectedImages: File[] = [];
   load() {
     this.gp.getHomeIntro().subscribe(res => this.list = res);
   }
-    onFileChange(e: any) {
-    this.images = Array.from(e.target.files);
-  }
+onFileChange(e: any) {
+  const files = Array.from(e.target.files) as File[];
+  this.images.push(...files);
+}
 
-  async submit() {
-    const imageUrls: string[] = [];
 
+
+async submit() {
+  if (this.isProcessing) return;
+
+  const action = this.editId ? 'update' : 'add';
+  if (!confirm(`Are you sure you want to ${action} this record?`)) return;
+
+  this.isProcessing = true;
+
+  try {
+    // ✅ START WITH OLD IMAGES
+    const finalImages: string[] = [...this.editingImages];
+
+    // ✅ UPLOAD & APPEND NEW IMAGES
     for (let f of this.images) {
       const url = await this.gp.uploadImage(f);
-      imageUrls.push(url);
+      finalImages.push(url);
     }
 
     const payload = {
       ...this.form.value,
-      images: imageUrls
+      images: finalImages // ✅ MERGED ARRAY
     };
 
     if (this.editId) {
       await this.gp.updateHomeIntro(this.editId, payload);
+      alert('Updated successfully ✅');
     } else {
       await this.gp.addHomeIntro(payload, this.uid);
+      alert('Added successfully ✅');
     }
 
     this.reset();
+  } catch (e) {
+    console.error(e);
+    alert('Something went wrong ❌');
+  } finally {
+    this.isProcessing = false;
   }
+}
 
-  edit(item: any) {
-    this.editId = item.id;
-    this.form.patchValue(item);
-  }
 
-  delete(id: string) {
-    if (confirm('Delete this record?')) {
-      this.gp.deleteHomeIntro(id);
-    }
-  }
 
-  reset() {
-    this.form.reset();
-    this.images = [];
-    this.editId = null;
-  }
+
+edit(item: any) {
+  this.editId = item.id;
+
+  this.form.patchValue({
+    nameText: item.nameText,
+    postText: item.postText,
+    introText: item.introText
+  });
+
+  // ✅ KEEP OLD IMAGES
+  this.editingImages = [...(item.images || [])];
+
+  // reset new files
+  this.images = [];
+}
+
+
+
+
+delete(id: string) {
+  if (this.isProcessing) return;
+
+  const confirmed = confirm('Are you sure you want to delete this record?');
+  if (!confirmed) return;
+
+  this.isProcessing = true;
+
+  this.gp.deleteHomeIntro(id)
+    .then(() => {
+      alert('Record deleted successfully 🗑️');
+    })
+    .catch(() => {
+      alert('Delete failed ❌');
+    })
+    .finally(() => {
+      this.isProcessing = false;
+    });
+}
+
+
+reset() {
+  this.form.reset();
+  this.images = [];          // new files
+  this.editingImages = [];  // old urls
+  this.editId = null;
+}
+
+
+
 
   /* ===== NOTICE ===== */
   addNotice() {

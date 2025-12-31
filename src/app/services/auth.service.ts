@@ -8,8 +8,7 @@ export class AuthService {
 
 private readonly ALLOWED_LOGIN_EMAILS = [
   'infopsatech@gmail.com',
-  'services.psatech@gmail.com',
-  'wash.bavi@gmail.com',
+  'services.psatech@gmail.com'
 ];
 
 
