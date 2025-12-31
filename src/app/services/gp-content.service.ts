@@ -7,7 +7,9 @@ import { map } from 'rxjs/operators';
 export class GpContentService {
 
   // 🔑 ROOT FOLDER (ONLY CHANGE POINT)
-  private readonly ROOT = 'sendi';
+  // 🔑 ROOT FOLDER (ONLY CHANGE POINT)
+private readonly ROOT = 'parde';
+
 // store old images during edit
   constructor(
     private firestore: AngularFirestore,
