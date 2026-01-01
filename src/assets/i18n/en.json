@@ -1,6 +1,6 @@
 {
     "TITLE": {
-    "PANCHAYAT": "Grampanchayat  Bavi "
+    "PANCHAYAT": "Grampanchayat  GOJEWADA "
   },
   "NAV": {
     "HOME": "Home",
@@ -74,7 +74,7 @@
     "primaryHealth": { "label": "Primary Health Centers", "value": "1" },
     "hospitals": { "label": "Sub-District Hospitals", "value": "28" },
     "veterinary": { "label": "Veterinary Clinics", "value": "10" },
-    "population": { "label": "Total Population", "value": "3279" },
+    "population": { "label": "Total Population", "value": "2071" },
     "male": { "label": "Male", "value": "1690" },
     "female": { "label": "Female", "value": "1589" },
     "anganwadi": { "label": "Anganwadi Center", "value": "4" }

@@ -32,8 +32,8 @@
   }
 
   .officer-card img {
-    width: 160px;
-    height: 160px;
+    width: 274x;
+    height: 350px;
     object-fit: cover;
     border-radius: 12px;
     margin-bottom: 15px;
@@ -94,11 +94,11 @@
   .card img:hover {
     transform: scale(1.05);
   }
-  /* Officer Card */
+  /* Officer Card */gpgojwada
 .officer-card {
   background: #ffffff;
   border-radius: 14px;
-  padding: 20px;
+  padding: 60px;
   box-shadow: 0 6px 18px rgba(0,0,0,0.08);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
@@ -111,7 +111,7 @@
 /* Officer Images */
 .officer-img {
   width: 100%;
-  height: 260px;
+  height: 20px;
   object-fit: cover;
   border-radius: 12px;
   margin-bottom: 12px;
@@ -135,7 +135,8 @@
 /* Mobile Optimization */
 @media (max-width: 768px) {
   .officer-img {
-    height: 220px;
+      width: 100% !important;
+    height: 202px;
   }
 }
 

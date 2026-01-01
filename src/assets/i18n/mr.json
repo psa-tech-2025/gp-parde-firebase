@@ -1,7 +1,7 @@
 {
   
   "TITLE": {
-    "PANCHAYAT": "ग्रामपंचायत गोलेगाव"
+    "PANCHAYAT": "ग्रामपंचायत गोजवाडा"
   },
 
 
@@ -114,14 +114,14 @@
     "secondarySchools": { "label": "जि.प. माध्यमिक शाळा", "value": "१" },
     "gramPanchayats": { "label": "एकूण ग्रामपंचायती", "value": "६६" },
     "municipalCouncil": { "label": "नगर परिषदेत समाविष्ट गावे", "value": "१" },
-    "totalArea": { "label": "एकूण क्षेत्रफळ (हेक्टरमध्ये)", "value": "2342" },
+    "totalArea": { "label": "एकूण क्षेत्रफळ (हेक्टरमध्ये)", "value": "1276.79" },
     "cultivableArea": { "label": "खतपदार्थ क्षेत्रफळ (हेक्टरमध्ये)", "value": "५८२८८" },
     "primaryHealth": { "label": "प्राथमिक आरोग्य केंद्रे", "value": "1" },
     "hospitals": { "label": "उपजिल्हा रुग्णालये", "value": "२८" },
-    "veterinary": { "label": "पशुवैद्यकीय दवाखाने", "value": "१०" },
-    "population": { "label": "एकूण लोकसंख्या", "value": "3279" },
-    "male": { "label": "पुरुष", "value": "1690" },
-    "female": { "label": "स्त्रिया", "value": "1589" },
+    "veterinary": { "label": "पशुवैद्यकीय दवाखाने", "value": "" },
+    "population": { "label": "एकूण लोकसंख्या", "value": "2071" },
+    "male": { "label": "पुरुष", "value": "1075" },
+    "female": { "label": "स्त्रिया", "value": "996" },
     "anganwadi": { "label": "अंगणवाडी केंद्र", "value": "4" }
   },
   "reports": {
